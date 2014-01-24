@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ReportingSiteModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ReportingSiteModelStoreContainer">
+          <EntitySet Name="VMHostInfo" EntityType="ReportingSiteModel.Store.VMHostInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VMInfo" EntityType="ReportingSiteModel.Store.VMInfo" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_VMInfo_VMHostInfo" Association="ReportingSiteModel.Store.FK_VMInfo_VMHostInfo">
+            <End Role="VMHostInfo" EntitySet="VMHostInfo" />
+            <End Role="VMInfo" EntitySet="VMInfo" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="VMHostInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IPAddress" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="URL" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="VMInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="LastBootTime" Type="datetime2" Nullable="false" />
+          <Property Name="HostId" Type="int" Nullable="false" />
+          <Property Name="MacAddress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_VMInfo_VMHostInfo">
+          <End Role="VMHostInfo" Type="ReportingSiteModel.Store.VMHostInfo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VMInfo" Type="ReportingSiteModel.Store.VMInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VMHostInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VMInfo">
+              <PropertyRef Name="HostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ReportingSiteModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ReportingSiteEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="VMHostInfoes" EntityType="ReportingSiteModel.VMHostInfo" />
+          <EntitySet Name="VMInfoes" EntityType="ReportingSiteModel.VMInfo" />
+          <AssociationSet Name="FK_VMInfo_VMHostInfo" Association="ReportingSiteModel.FK_VMInfo_VMHostInfo">
+            <End Role="VMHostInfo" EntitySet="VMHostInfoes" />
+            <End Role="VMInfo" EntitySet="VMInfoes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="VMHostInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IPAddress" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="URL" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="VMInfoes" Relationship="ReportingSiteModel.FK_VMInfo_VMHostInfo" FromRole="VMHostInfo" ToRole="VMInfo" />
+        </EntityType>
+        <EntityType Name="VMInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IPAddress" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="LastBootTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="HostId" Type="Int32" Nullable="false" />
+          <Property Name="MacAddress" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="VMHostInfo" Relationship="ReportingSiteModel.FK_VMInfo_VMHostInfo" FromRole="VMInfo" ToRole="VMHostInfo" />
+        </EntityType>
+        <Association Name="FK_VMInfo_VMHostInfo">
+          <End Role="VMHostInfo" Type="ReportingSiteModel.VMHostInfo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VMInfo" Type="ReportingSiteModel.VMInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VMHostInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VMInfo">
+              <PropertyRef Name="HostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ReportingSiteModelStoreContainer" CdmEntityContainer="ReportingSiteEntities">
+          <EntitySetMapping Name="VMHostInfoes">
+            <EntityTypeMapping TypeName="ReportingSiteModel.VMHostInfo">
+              <MappingFragment StoreEntitySet="VMHostInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VMInfoes">
+            <EntityTypeMapping TypeName="ReportingSiteModel.VMInfo">
+              <MappingFragment StoreEntitySet="VMInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LastBootTime" ColumnName="LastBootTime" />
+                <ScalarProperty Name="HostId" ColumnName="HostId" />
+                <ScalarProperty Name="MacAddress" ColumnName="MacAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
