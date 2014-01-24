@@ -55,21 +55,17 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
-    <Reference Include="Vim25Service2010, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Vim25Service2010.dll</HintPath>
+    <Reference Include="Vim25Service2010">
+      <HintPath>..\Libs\Vim25Service2010.dll</HintPath>
     </Reference>
-    <Reference Include="Vim25Service2010.XmlSerializers, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Vim25Service2010.XmlSerializers.dll</HintPath>
+    <Reference Include="Vim25Service2010.XmlSerializers">
+      <HintPath>..\Libs\Vim25Service2010.XmlSerializers.dll</HintPath>
     </Reference>
-    <Reference Include="VimService2010, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\VimService2010.dll</HintPath>
+    <Reference Include="VimService2010">
+      <HintPath>..\Libs\VimService2010.dll</HintPath>
     </Reference>
-    <Reference Include="VimService2010.XmlSerializers, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\VimService2010.XmlSerializers.dll</HintPath>
+    <Reference Include="VimService2010.XmlSerializers">
+      <HintPath>..\Libs\VimService2010.XmlSerializers.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
