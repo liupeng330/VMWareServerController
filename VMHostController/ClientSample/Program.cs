@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Configuration;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,21 @@ namespace ClientSample
         {
             using (VMHostServiceClient client = new VMHostServiceClient())
             {
-                client.UpdateVMInfo();
+                switch (args[0])
+                {
+                    case "on":
+                        client.PowerOn(args[1]);
+                        break;
+                    case "off":
+                        client.PowerOff(args[1]);
+                        break;
+                    case "restore":
+                        client.Restore(args[1]);
+                        break;
+                    case "ispoweron":
+                        Console.WriteLine(client.IsPowerOn(args[1]));
+                        break;
+                }
             }
         }
     }
